@@ -1,0 +1,171 @@
+{
+    "use_case": "Text Classification",
+    "model": "./BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
+    "model_parameters": {
+        "num_labels": 3,
+        "epochs": 3,
+        "batch_size": 8
+    },
+    "results": [
+        {
+            "category": "Diabetes",
+            "note": "Diabetes management needs improvement due to poor glycemic control.",
+            "true_label": 0,
+            "predicted_label": 2,
+            "predicted_category": "Asthma",
+            "confidence_score": 0.3367384374141693
+        },
+        {
+            "category": "Asthma",
+            "note": "Respiratory issues linked to asthma, particularly during exercise.",
+            "true_label": 2,
+            "predicted_label": 2,
+            "predicted_category": "Asthma",
+            "confidence_score": 0.4075184464454651
+        },
+        {
+            "category": "Diabetes",
+            "note": "Frequent urination and excessive thirst reported; possible diabetes symptoms.",
+            "true_label": 0,
+            "predicted_label": 2,
+            "predicted_category": "Asthma",
+            "confidence_score": 0.4699910283088684
+        },
+        {
+            "category": "Hypertension",
+            "note": "Elevated blood pressure observed during recent check-up.",
+            "true_label": 1,
+            "predicted_label": 2,
+            "predicted_category": "Asthma",
+            "confidence_score": 0.4004753530025482
+        },
+        {
+            "category": "Hypertension",
+            "note": "Elevated blood pressure observed during recent check-up.",
+            "true_label": 1,
+            "predicted_label": 2,
+            "predicted_category": "Asthma",
+            "confidence_score": 0.4004752039909363
+        },
+        {
+            "category": "Asthma",
+            "note": "Frequent shortness of breath and wheezing reported by patient.",
+            "true_label": 2,
+            "predicted_label": 2,
+            "predicted_category": "Asthma",
+            "confidence_score": 0.380947470664978
+        },
+        {
+            "category": "Diabetes",
+            "note": "Diabetes management needs improvement due to poor glycemic control.",
+            "true_label": 0,
+            "predicted_label": 2,
+            "predicted_category": "Asthma",
+            "confidence_score": 0.3367384672164917
+        },
+        {
+            "category": "Hypertension",
+            "note": "Hypertension is being managed with medication, but blood pressure remains high.",
+            "true_label": 1,
+            "predicted_label": 2,
+            "predicted_category": "Asthma",
+            "confidence_score": 0.31301242113113403
+        },
+        {
+            "category": "Hypertension",
+            "note": "Hypertension is being managed with medication, but blood pressure remains high.",
+            "true_label": 1,
+            "predicted_label": 2,
+            "predicted_category": "Asthma",
+            "confidence_score": 0.31301242113113403
+        },
+        {
+            "category": "Hypertension",
+            "note": "Medication for hypertension adjusted due to side effects.",
+            "true_label": 1,
+            "predicted_label": 2,
+            "predicted_category": "Asthma",
+            "confidence_score": 0.2826705574989319
+        },
+        {
+            "category": "Hypertension",
+            "note": "Hypertension is being managed with medication, but blood pressure remains high.",
+            "true_label": 1,
+            "predicted_label": 2,
+            "predicted_category": "Asthma",
+            "confidence_score": 0.31301242113113403
+        },
+        {
+            "category": "Diabetes",
+            "note": "Patient has a long history of type 2 diabetes with recent complications.",
+            "true_label": 0,
+            "predicted_label": 2,
+            "predicted_category": "Asthma",
+            "confidence_score": 0.45730316638946533
+        },
+        {
+            "category": "Diabetes",
+            "note": "Patient has a long history of type 2 diabetes with recent complications.",
+            "true_label": 0,
+            "predicted_label": 2,
+            "predicted_category": "Asthma",
+            "confidence_score": 0.45730316638946533
+        },
+        {
+            "category": "Asthma",
+            "note": "Frequent shortness of breath and wheezing reported by patient.",
+            "true_label": 2,
+            "predicted_label": 2,
+            "predicted_category": "Asthma",
+            "confidence_score": 0.380947470664978
+        },
+        {
+            "category": "Asthma",
+            "note": "Asthma symptoms worsening, especially during cold weather.",
+            "true_label": 2,
+            "predicted_label": 2,
+            "predicted_category": "Asthma",
+            "confidence_score": 0.4204821288585663
+        },
+        {
+            "category": "Hypertension",
+            "note": "Hypertension is being managed with medication, but blood pressure remains high.",
+            "true_label": 1,
+            "predicted_label": 2,
+            "predicted_category": "Asthma",
+            "confidence_score": 0.31301242113113403
+        },
+        {
+            "category": "Hypertension",
+            "note": "Hypertension is being managed with medication, but blood pressure remains high.",
+            "true_label": 1,
+            "predicted_label": 2,
+            "predicted_category": "Asthma",
+            "confidence_score": 0.31301242113113403
+        },
+        {
+            "category": "Hypertension",
+            "note": "Hypertension is being managed with medication, but blood pressure remains high.",
+            "true_label": 1,
+            "predicted_label": 2,
+            "predicted_category": "Asthma",
+            "confidence_score": 0.3130124807357788
+        },
+        {
+            "category": "Asthma",
+            "note": "Respiratory issues linked to asthma, particularly during exercise.",
+            "true_label": 2,
+            "predicted_label": 2,
+            "predicted_category": "Asthma",
+            "confidence_score": 0.4075184464454651
+        },
+        {
+            "category": "Asthma",
+            "note": "Frequent shortness of breath and wheezing reported by patient.",
+            "true_label": 2,
+            "predicted_label": 2,
+            "predicted_category": "Asthma",
+            "confidence_score": 0.380947470664978
+        }
+    ]
+}

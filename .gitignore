@@ -10,6 +10,7 @@ bio_clinical
 biobert-v1.1
 pythorch
 BiomedCLIP-PubMedBERT_256-vit_base_patch16_224
+BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext
 # Ignore Python cache files
 __pycache__/
 *.py[cod]

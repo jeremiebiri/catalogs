@@ -1,4 +1,6 @@
+
 import os
+import json
 import torch
 import pandas as pd   
 from transformers import (
@@ -60,10 +62,27 @@ class CustomTrainer(Trainer):
                 param.data = param.contiguous()
         super()._save(output_dir, state_dict)
 
-def create_predictions_catalog(trainer, test_dataset, device, model_name, num_labels, epochs, batch_size):
+def create_predictions_catalog(trainer, test_dataset, device, model_name, num_labels, epochs, batch_size, file_path="predictions_catalog.json"):
+    # Define categories for mapping
+    categories = {
+        0: "Diabetes",
+        1: "Hypertension",
+        2: "Asthma"
+    }
+
     predictions = trainer.predict(test_dataset)
     preds = torch.tensor(predictions.predictions).to(device).argmax(dim=1)
-    
+
+    # Check if the file already exists and load existing data
+    if os.path.exists(file_path):
+        with open(file_path, "r") as f:
+            try:
+                existing_catalog = json.load(f)
+            except json.JSONDecodeError:
+                existing_catalog = {"results": []}
+    else:
+        existing_catalog = {"results": []}
+
     catalog = {
         "use_case": "Text Classification",
         "model": model_name,
@@ -72,22 +91,109 @@ def create_predictions_catalog(trainer, test_dataset, device, model_name, num_la
             "epochs": epochs,
             "batch_size": batch_size,
         },
-        "results": []
+        "results": existing_catalog.get("results", [])  # Start with existing results if present
     }
 
+    # Add new results to the catalog, including category names with a fallback for undefined categories
     for i in range(len(test_dataset)):
         note = test_dataset["text"][i]
         true_label = test_dataset["label"][i]
         predicted_label = preds[i].item()
-        confidence_score = float(predictions.predictions[i].max())  
+        confidence_score = float(predictions.predictions[i].max())
+        
+        # Use "Unknown" if the category is not defined in the dictionary
+        true_category = categories.get(true_label, "Unknown")
+        predicted_category = categories.get(predicted_label, "Unknown")
+        
         catalog["results"].append({
+            "category": true_category,  # Map true_label to its category or "Unknown"
             "note": note,
             "true_label": true_label,
             "predicted_label": predicted_label,
+            "predicted_category": predicted_category,  # Map predicted_label to its category or "Unknown"
             "confidence_score": confidence_score,
         })
-    
+
+    # Save the updated catalog to the file
+    with open(file_path, "w") as f:
+        json.dump(catalog, f, indent=4)
+
     return preds, catalog
+
+
+# def create_predictions_catalog(trainer, test_dataset, device, model_name, num_labels, epochs, batch_size, file_path="predictions_catalog.json"):
+#     predictions = trainer.predict(test_dataset)
+#     preds = torch.tensor(predictions.predictions).to(device).argmax(dim=1)
+
+#     # Check if the file already exists and load existing data
+#     if os.path.exists(file_path):
+#         with open(file_path, "r") as f:
+#             try:
+#                 existing_catalog = json.load(f)
+#             except json.JSONDecodeError:
+#                 existing_catalog = {"results": []}
+#     else:
+#         existing_catalog = {"results": []}
+
+#     catalog = {
+#         "use_case": "Text Classification",
+#         "model": model_name,
+#         "model_parameters": {
+#             "num_labels": num_labels,
+#             "epochs": epochs,
+#             "batch_size": batch_size,
+#         },
+#         "results": existing_catalog.get("results", [])  # Start with existing results if present
+#     }
+
+#     # Add new results to the catalog
+#     for i in range(len(test_dataset)):
+#         note = test_dataset["text"][i]
+#         true_label = test_dataset["label"][i]
+#         predicted_label = preds[i].item()
+#         confidence_score = float(predictions.predictions[i].max())
+#         catalog["results"].append({
+#             "note": note,
+#             "true_label": true_label,
+#             "predicted_label": predicted_label,
+#             "confidence_score": confidence_score,
+#         })
+
+#     # Save the updated catalog to the file
+#     with open(file_path, "w") as f:
+#         json.dump(catalog, f, indent=4)
+
+#     return preds, catalog
+
+
+# def create_predictions_catalog(trainer, test_dataset, device, model_name, num_labels, epochs, batch_size):
+#     predictions = trainer.predict(test_dataset)
+#     preds = torch.tensor(predictions.predictions).to(device).argmax(dim=1)
+    
+#     catalog = {
+#         "use_case": "Text Classification",
+#         "model": model_name,
+#         "model_parameters": {
+#             "num_labels": num_labels,
+#             "epochs": epochs,
+#             "batch_size": batch_size,
+#         },
+#         "results": []
+#     }
+
+#     for i in range(len(test_dataset)):
+#         note = test_dataset["text"][i]
+#         true_label = test_dataset["label"][i]
+#         predicted_label = preds[i].item()
+#         confidence_score = float(predictions.predictions[i].max())  
+#         catalog["results"].append({
+#             "note": note,
+#             "true_label": true_label,
+#             "predicted_label": predicted_label,
+#             "confidence_score": confidence_score,
+#         })
+    
+#     return preds, catalog
 
 def compute_metrics(true_labels, predicted_labels):
     print("Classification Report:")
