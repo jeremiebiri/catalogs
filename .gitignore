@@ -11,6 +11,9 @@ biobert-v1.1
 pythorch
 BiomedCLIP-PubMedBERT_256-vit_base_patch16_224
 BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext
+fine_tuned_Bio_ClinicalBERT
+
+predictions_catalog.json
 # Ignore Python cache files
 __pycache__/
 *.py[cod]
